@@ -1,0 +1,15 @@
+name: refresh-cdn
+on:
+  push:
+    branches: [ main ]
+jobs:
+  refresh-cdn:
+    runs-on: ubuntu-latest
+    steps:
+      - name: tencent cdn refresh
+        uses: docker://registry.cn-hangzhou.aliyuncs.com/particle/tencent-cdn-refresh:latest
+        env:
+          SECRET_ID: ${{ secrets.SECRET_ID }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        with:
+          args: -id $SECRET_ID -key $SECRET_KEY -paths https://tclx.xyz/,https://learn.tclx.xyz/
