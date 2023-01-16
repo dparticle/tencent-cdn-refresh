@@ -5,4 +5,6 @@ RUN CGO_ENABLED=0 go build -o tcr .
 
 FROM alpine
 COPY --from=builder /app/tcr /tcr
-ENTRYPOINT ["/tcr"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
